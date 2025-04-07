@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generator.mapper.VitalSignsMapper">
+
+    <resultMap id="BaseResultMap" type="generator.domain.VitalSigns">
+            <id property="record_id" column="record_id" jdbcType="INTEGER"/>
+            <result property="user_id" column="user_id" jdbcType="INTEGER"/>
+            <result property="record_date" column="record_date" jdbcType="DATE"/>
+            <result property="weight" column="weight" jdbcType="DECIMAL"/>
+            <result property="blood_pressure_systolic" column="blood_pressure_systolic" jdbcType="SMALLINT"/>
+            <result property="blood_pressure_diastolic" column="blood_pressure_diastolic" jdbcType="SMALLINT"/>
+            <result property="blood_glucose" column="blood_glucose" jdbcType="DECIMAL"/>
+            <result property="cholesterol" column="cholesterol" jdbcType="DECIMAL"/>
+            <result property="recorded_at" column="recorded_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        record_id,user_id,record_date,
+        weight,blood_pressure_systolic,blood_pressure_diastolic,
+        blood_glucose,cholesterol,recorded_at
+    </sql>
+</mapper>
