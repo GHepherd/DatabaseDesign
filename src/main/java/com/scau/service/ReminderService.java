@@ -1,5 +1,8 @@
 package com.scau.service;
 
+import com.scau.entity.ResponseResult;
+import com.scau.entity.reminder.dto.ReminderAddDto;
+import com.scau.entity.reminder.vo.ReminderAddVo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,4 +14,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface ReminderService {
+    ResponseResult<ReminderAddVo> reminderAdd(ReminderAddDto reminderAddDto);
 }

@@ -88,7 +88,7 @@ CREATE TABLE health_goals (
 CREATE TABLE health_reminders (
                                   reminder_id INT AUTO_INCREMENT PRIMARY KEY,
                                   user_id INT NOT NULL,
-                                  reminder_type ENUM('medical_checkup','medication','water_intake','other') NOT NULL,
+                                  reminder_type VARCHAR(30) NOT NULL,
                                   reminder_content VARCHAR(255) NOT NULL,
                                   trigger_time DATETIME NOT NULL,
                                   is_completed BOOLEAN DEFAULT FALSE,
