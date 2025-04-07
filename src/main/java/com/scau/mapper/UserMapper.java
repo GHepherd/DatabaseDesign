@@ -1,7 +1,9 @@
 package com.scau.mapper;
 
 import com.scau.entity.user.pojo.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
@@ -21,4 +23,7 @@ public interface UserMapper {
          */
         @Select("select user_id,username,password from users where username=#{username}")
         User selectUserByUsername(String username);
+
+        @Insert("INSERT INTO users(username,password,email) values (#{username},#{password},#{email})")
+        void insertUser(@Param("username") String username,@Param("password") String password, @Param("email") String email);
 }

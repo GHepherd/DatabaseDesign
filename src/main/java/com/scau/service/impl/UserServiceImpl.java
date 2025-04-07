@@ -8,11 +8,13 @@ import com.scau.entity.user.dto.UserRegisterDto;
 import com.scau.entity.user.pojo.User;
 import com.scau.entity.user.vo.UserLoginVo;
 import com.scau.entity.user.vo.UserPersonalInfoVo;
+import com.scau.exception.UserAlreadyExitedException;
 import com.scau.exception.UserNotExitedException;
 import com.scau.mapper.UserMapper;
 import com.scau.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author <a href="https://github.com/TennKane">gtkkang</a>
@@ -53,6 +55,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseResult register(UserRegisterDto userRegisterDto) {
-        return null;
+        String username = userRegisterDto.getUsername();
+        User user = userMapper.selectUserByUsername(username);
+        if(user!=null){
+            throw new UserAlreadyExitedException();
+        }
+        userMapper.insertUser(username,userRegisterDto.getPassword(),userRegisterDto.getEmail());
+        return ResponseResult.successResult();
     }
 }

@@ -36,6 +36,12 @@ public class User implements Serializable {
     private String password;
 
     /**
+     * 邮箱
+     */
+    @TableField(value = "email")
+    private String email;
+
+    /**
      * 性别
      */
     @TableField(value = "gender")

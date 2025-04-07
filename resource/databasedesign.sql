@@ -11,6 +11,8 @@ use databasedesigndb;
 CREATE TABLE users (
                        user_id INT AUTO_INCREMENT PRIMARY KEY COMMENT '用户ID',
                        username VARCHAR(50) NOT NULL UNIQUE COMMENT '用户名',
+                       password VARCHAR(255) NOT NULL COMMENT '加密后的密码哈希值',
+                       email VARCHAR(50) NOT NULL COMMENT '邮箱',
                        gender ENUM('M','F','O') COMMENT '性别',
                        birthdate DATE COMMENT '出生日期',
                        height DECIMAL(5,2) COMMENT '身高(cm)',
@@ -95,10 +97,3 @@ CREATE TABLE health_reminders (
                                   FOREIGN KEY (user_id) REFERENCES users(user_id),
                                   INDEX idx_user_reminders (user_id, trigger_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-ALTER TABLE users
-    ADD COLUMN password VARCHAR(255) NOT NULL COMMENT '加密后的密码哈希值'
-        AFTER username;
-
-
