@@ -1,5 +1,6 @@
 package com.scau.interceptor;
 
+import com.scau.constant.TokenMap;
 import com.scau.utils.ThreadLocalUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,10 +26,10 @@ public class TokenInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String userId = request.getHeader("userId");
+        Integer userId = TokenMap.get(request.getHeader("token"));
         if(userId != null){
             //存入到当前线程中
-            ThreadLocalUtil.setUserId(Integer.valueOf(userId).longValue());
+            ThreadLocalUtil.setUserId(userId.longValue());
         }
         return true;
     }

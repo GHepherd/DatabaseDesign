@@ -33,8 +33,8 @@ public class UserController {
      * @param userLoginDto 登录信息
      * @return 登录结果
      */
-    @PostMapping
-    public ResponseResult<UserLoginVo> userLogin(UserLoginDto userLoginDto) {
+    @PostMapping("/login")
+    public ResponseResult<UserLoginVo> userLogin(@RequestBody UserLoginDto userLoginDto) {
         return userService.userLogin(userLoginDto);
     }
 
