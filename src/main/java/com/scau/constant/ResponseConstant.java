@@ -32,6 +32,8 @@ public class ResponseConstant {
 
     public static final String USER_NOT_EXIST = "用户不存在";
 
+    public static final String USER_ALREADY_EXIST = "用户名已存在";
+
     public static final String NO_OPERATOR_AUTH = "无权限操作";
 
 }

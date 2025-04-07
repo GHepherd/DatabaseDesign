@@ -24,7 +24,7 @@ public class UserController {
      * @return 登录结果
      */
     @PostMapping("/register")
-    public ResponseResult register(UserRegisterDto userRegisterDto) {
+    public ResponseResult register(@RequestBody UserRegisterDto userRegisterDto) {
         return userService.register(userRegisterDto);
     }
 
