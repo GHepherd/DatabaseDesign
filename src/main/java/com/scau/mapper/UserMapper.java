@@ -1,13 +1,11 @@
 package com.scau.mapper;
 
+import cn.hutool.core.date.DateTime;
 import com.scau.entity.user.pojo.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
-public interface UserMapper {
+public interface UserMapper{
         /**
          * 判断用户是否存在
          * @param user_id
@@ -21,9 +19,17 @@ public interface UserMapper {
          * @param username
          * @return
          */
-        @Select("select user_id,username,password from users where username=#{username}")
+        @Select("select user_id,username,pass_word from users where username=#{username}")
         User selectUserByUsername(String username);
 
-        @Insert("INSERT INTO users(username,password,email) values (#{username},#{password},#{email})")
-        void insertUser(@Param("username") String username,@Param("password") String password, @Param("email") String email);
+        @Insert("INSERT INTO users(username,pass_word,email,created_at) values (#{username},#{password},#{email},#{now})")
+        void insertUser(@Param("username") String username, @Param("password") String password, @Param("email") String email, @Param("now") DateTime now);
+
+        @Select("SELECT * from users where user_id=#{userId}")
+        User selectUserById(Long userId);
+
+        void updateUserById(@Param("userId") Long userId, @Param("userName") String userName,@Param("email") String email);
+
+        @Update("update users set pass_word=#{password} where user_id=#{userId}")
+        void updatePasswordById(@Param("userId") Long userId, @Param("password") String newPassword);
 }

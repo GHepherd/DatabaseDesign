@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scau.mapper.UserMapper">
+    <update id="updateUserById" >
+        update users
+        <set>
+            <if test="userName!=null and userName!=''">username=#{userName},</if>
+            <if test="email!=null and email!=''">email=#{email}</if>
+        </set>
+        <where>
+            user_id=#{userId}
+        </where>
+    </update>
+
+
+</mapper>

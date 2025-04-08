@@ -30,34 +30,16 @@ public class User implements Serializable {
     private String username;
 
     /**
-     * 密码
-     */
-    @TableField(value = "password")
-    private String password;
-
-    /**
      * 邮箱
      */
     @TableField(value = "email")
     private String email;
 
     /**
-     * 性别
+     * 密码
      */
-    @TableField(value = "gender")
-    private Object gender;
-
-    /**
-     * 出生日期
-     */
-    @TableField(value = "birthdate")
-    private Date birthdate;
-
-    /**
-     * 身高(cm)
-     */
-    @TableField(value = "height")
-    private BigDecimal height;
+    @TableField(value = "pass_word")
+    private String password;
 
     /**
      * 

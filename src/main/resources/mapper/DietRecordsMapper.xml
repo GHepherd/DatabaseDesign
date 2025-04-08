@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scau.mapper.DietRecordsMapper">
+
+    <select id="selectList" resultType="com.scau.entity.healthData.pojo.DietRecords">
+        select * from diet_records
+        <where>
+            user_id=#{userId}
+            <if test="keyword!=null and keyword!=''">and note like concat('%',#{keyword},'%') </if>
+        </where>
+        limit #{startIndex},#{limit} order by created_at
+    </select>
+</mapper>

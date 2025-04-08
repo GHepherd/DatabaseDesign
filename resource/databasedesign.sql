@@ -20,11 +20,13 @@ CREATE TABLE users (
 CREATE TABLE vital_signs (
                              record_id INT AUTO_INCREMENT PRIMARY KEY,
                              user_id INT NOT NULL,
-                             weight DECIMAL(5,1) COMMENT '体重(kg)',
                              height DECIMAL(5,2) COMMENT '身高(cm)',
+                             weight DECIMAL(5,1) COMMENT '体重(kg)',
                              blood_pressure SMALLINT COMMENT '血压(mmHg)',
-                             blood_glucose DECIMAL(4,1) COMMENT '血糖(mmol/L)',
+                             blood_sugar DECIMAL(4,1) COMMENT '血糖(mmol/L)',
                              blood_lipids DECIMAL(4,1) COMMENT '血脂(mmol/L)',
+                             note VARCHAR(255) COMMENT '备注',
+                             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                              FOREIGN KEY (user_id) REFERENCES users(user_id),
                              INDEX idx_user_date (user_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -38,6 +40,8 @@ CREATE TABLE exercise_records (
                                   distance_km DECIMAL(5,2) COMMENT '距离(千米)',
                                   calories DECIMAL(6,1) COMMENT '消耗卡路里',
                                   heartRate INT NOT NULL,
+                                  note VARCHAR(255) COMMENT '备注',
+                                  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                                   FOREIGN KEY (user_id) REFERENCES users(user_id),
                                   INDEX idx_user_exercise (user_id, exercise_type)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -46,10 +50,14 @@ CREATE TABLE exercise_records (
 CREATE TABLE diet_records (
                               diet_id INT AUTO_INCREMENT PRIMARY KEY,
                               user_id INT NOT NULL,
+                              mealTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                               food_name VARCHAR(100) NOT NULL COMMENT '食物名称',
                               amount DECIMAL(6,2) COMMENT '数量(克/毫升)',
-                              calories DECIMAL(6,1) COMMENT '热量(kcal)',
-
+                              protein DECIMAL(6,1) COMMENT '蛋白质',
+                              carbs DECIMAL(6,1) COMMENT '碳水化合物',
+                              fat DECIMAL(6,1) COMMENT '脂肪',
+                              note VARCHAR(255) COMMENT '备注',
+                              created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                               FOREIGN KEY (user_id) REFERENCES users(user_id),
                               INDEX idx_user_meal (user_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -61,6 +69,8 @@ CREATE TABLE sleep_records (
                                sleep_start DATETIME NOT NULL,
                                sleep_end DATETIME NOT NULL,
                                deep_sleep_minutes SMALLINT UNSIGNED COMMENT '深睡时长(分钟)',
+                               note VARCHAR(255) COMMENT '备注',
+                               created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                                FOREIGN KEY (user_id) REFERENCES users(user_id),
                                INDEX idx_user_sleep (user_id, sleep_start)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
