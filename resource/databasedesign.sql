@@ -11,7 +11,7 @@ use databasedesigndb;
 CREATE TABLE users (
                        user_id INT AUTO_INCREMENT PRIMARY KEY COMMENT '用户ID',
                        username VARCHAR(50) NOT NULL UNIQUE COMMENT '用户名',
-                       emial VARCHAR(50) NOT NULL  COMMENT '邮箱',
+                       email VARCHAR(50) NOT NULL  COMMENT '邮箱',
                        pass_word VARCHAR(50) NOT NULL  COMMENT '密码',
                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
