@@ -29,21 +29,32 @@ public class Reminder implements Serializable {
     private String reminderType;
 
     /**
-     * 提醒内容
+     * 提醒主题
      */
-    @TableField(value = "reminder_content")
-    private String reminderContent;
+    @TableField(value = "reminder_title")
+    private String reminderTitle;
+    /**
+     * 提醒频率
+     */
+    @TableField(value = "reminder_repeat")
+    private String reminderRepeat;
 
     /**
      * 触发时间
      */
-    @TableField(value = "trigger_time")
-    private DateTime triggerTime;
+    @TableField(value = "datetime")
+    private DateTime datetime;
 
     /**
-     * 是否完成
+     * 完成状态
      */
-    @TableField(value = "is_completed")
-    private boolean isCompleted;
+    @TableField(value = "status")
+    private String status;
+
+    /**
+     * 描述
+     */
+    @TableField(value = "description")
+    private String description;
 }
 

@@ -95,8 +95,10 @@ CREATE TABLE health_reminders (
                                   user_id INT NOT NULL,
                                   reminder_type VARCHAR(50) NOT NULL,
                                   reminder_title VARCHAR(255) NOT NULL,
+                                  reminder_repeat VARCHAR(10) NOT NULL,
                                   datetime DATETIME NOT NULL,
-                                  is_completed BOOLEAN DEFAULT FALSE,
+                                  status VARCHAR(10) NOT NULL,
+                                  description VARCHAR(255) NOT NULL,
                                   FOREIGN KEY (user_id) REFERENCES users(user_id),
                                   INDEX idx_user_reminders (user_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
