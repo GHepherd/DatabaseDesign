@@ -5,12 +5,12 @@
 <mapper namespace="com.scau.mapper.VitalSignsMapper">
 
 
-    <select id="selectList" resultType="com.scau.entity.healthData.pojo.VitalSigns">
+    <select id="selectList" resultType="com.scau.entity.healthData.pojo.VitalSigns" >
         select * from vital_signs
         <where>
             user_id=#{userId}
             <if test="keyword!=null and keyword!=''">and note like concat('%',#{keyword},'%') </if>
         </where>
-        limit #{startIndex},#{limit} order by created_at
+        order by created_at limit #{startIndex},#{limit}
     </select>
 </mapper>
