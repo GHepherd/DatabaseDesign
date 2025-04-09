@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scau.mapper.HealthGoalMapper">
+
+
+    <insert id="addHealGoal" useGeneratedKeys="true" keyProperty="goalId">
+        insert into health_goals (user_id, goal_type, target_value, start_date, end_date, current_progress, status, note, title, current_value)
+        VALUES (#{userId},#{goalType},#{targetValue},#{startDate},#{endDate},#{currentProgress},#{status},#{note},#{title},#{currentValue})
+    </insert>
+
+
+    <update id="updateGoal">
+        update health_goals
+        <set>
+            <if test="goalType!=null and goalType!=''">
+                goal_type=#{goalType},
+            </if>
+            target_value=#{targetValue},
+            start_date=#{startDate},
+            end_date=#{endDate},
+            current_progress=#{currentProgress},
+            <if test="status!=null and status!=''">
+                status=#{status},
+            </if>
+            note=#{note},
+            <if test="title!=null and status!='title'">
+                title=#{title},
+            </if>
+            current_value=#{currentValue}
+        </set>
+        where goal_id=#{goalId} and user_id=#{userId}
+    </update>
+</mapper>

@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
         UserLoginVo userLoginVo = new UserLoginVo();
         String token = MD5.create().digestHex(username);
         TokenMap.put(token,user.getUserId());
+        System.out.println(TokenMap.get(token));
         userLoginVo.setToken(token);
         return ResponseResult.successResult(userLoginVo);
     }
