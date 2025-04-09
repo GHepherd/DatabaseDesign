@@ -131,7 +131,7 @@ public class GoalTrackingServiceImpl extends ServiceImpl<HealthGoalMapper,Health
         if(userId==null){
             throw new UserNotLoginException();
         }
-        String status="complete";
+        String status="completed";
         healthGoalMapper.completeTarget(userId,id,status);
     }
 
