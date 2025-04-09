@@ -1,6 +1,10 @@
 package com.scau.mapper;
 
 import cn.hutool.core.date.DateTime;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.scau.entity.reminder.pojo.Reminder;
+import com.scau.entity.reminder.vo.ReminderGetVo;
 import jakarta.annotation.Resource;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -8,9 +12,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Mapper
-public interface ReminderMapper {
+public interface ReminderMapper extends BaseMapper<Reminder>{
+
     @Insert("INSERT INTO health_reminders (reminder_id, user_id, reminder_type, reminder_title, reminder_repeat, datetime, status, description) " +
             "VALUES (0,#{user_id},#{reminder_type},#{reminder_title},#{reminder_repeat},#{datetime},#{status},#{description})")
     void insertReminder(Long user_id,
