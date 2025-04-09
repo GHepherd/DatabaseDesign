@@ -31,7 +31,7 @@ public class ExerciseRecords {
      * 
      */
     @TableField(value = "exercise_type")
-    private Object exerciseType;
+    private String exerciseType;
 
     /**
      * 运动时长(分钟)

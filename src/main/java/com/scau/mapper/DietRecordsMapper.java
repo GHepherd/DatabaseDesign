@@ -1,7 +1,8 @@
 package com.scau.mapper;
 
 import com.scau.entity.healthData.pojo.DietRecords;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,6 +16,15 @@ import java.util.List;
 public interface DietRecordsMapper {
 
     List<DietRecords> selectList(@Param("userId")Long userId, @Param("startIndex") int startIndex, @Param("limit") Integer limit, @Param("keyword") String keyword);
+
+    @Insert("INSERT INTO diet_records values (0,#{userId},#{mealTime},#{foodName},#{amount},#{protein},#{carbs},#{fat},#{note},now())")
+    void insert(Long userId, String mealTime, String foodName, Double amount, Double protein, Double carbs, Double fat, String note);
+
+    void updateById(Long id, Long userId, String mealTime, String foodName, Double amount, Double protein, Double carbs, Double fat, String note);
+
+    @Delete("delete from diet_records where diet_id=#{id} and user_id=#{userId}")
+    void deleteById(Long id, Long userId);
+
     ;
 }
 

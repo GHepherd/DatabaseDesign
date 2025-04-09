@@ -3,6 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scau.mapper.VitalSignsMapper">
+    <update id="updateById">
+        UPDATE vital_signs 
+        <set>
+            <if test="height!=null">height=#{height},</if>
+            <if test="weight!=null">weight=#{weight},</if>
+            <if test="bloodPressure!=null">blood_pressure=#{bloodPressure},</if>
+            <if test="bloodSugar!=null">blood_sugar=#{bloodSugar},</if>
+            <if test="bloodLipids!=null">blood_lipids=#{bloodLipids},</if>
+            <if test="note!=null and note!=''">note=#{note}</if>
+        </set>
+        <where>
+            record_id=#{id} and user_id=#{userId}
+        </where>
+
+    </update>
 
 
     <select id="selectList" resultType="com.scau.entity.healthData.pojo.VitalSigns" >

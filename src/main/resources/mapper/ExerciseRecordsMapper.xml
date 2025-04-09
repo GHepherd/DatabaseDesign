@@ -3,6 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scau.mapper.ExerciseRecordsMapper">
+    <update id="updateById">
+        update exercise_records
+        <set>
+            <if test="exerciseType!=null and exerciseType!=''">exercise_type=#{exerciseType},</if>
+            <if test="duration!=null">duration_minutes=#{duration},</if>
+            <if test="distance!=null">distance_km=#{distance},</if>
+            <if test="calories!=null">calories=#{calories},</if>
+            <if test="heartRate!=null">heartRate=#{heartRate},</if>
+            <if test="note!=null and note!=''">note=#{note}</if>
+        </set>
+        <where>
+            exercise_id=#{id} and user_id=#{userId}
+        </where>
+    </update>
 
     <select id="selectList" resultType="com.scau.entity.healthData.pojo.ExerciseRecords">
         select * from exercise_records
@@ -10,6 +24,6 @@
             user_id=#{userId}
             <if test="keyword!=null and keyword!=''">and note like concat('%',#{keyword},'%') </if>
         </where>
-        limit #{startIndex},#{limit} order by created_at
+        order by created_at limit #{startIndex},#{limit}
     </select>
 </mapper>

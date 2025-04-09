@@ -54,7 +54,7 @@ public class SleepRecords {
      * 
      */
     @TableField(value = "created_at")
-    private Date created_at;
+    private Date createdAt;
 
 
 }

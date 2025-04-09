@@ -19,16 +19,13 @@ public class VitalSigns {
      * 
      */
     @TableId(value = "record_id", type = IdType.AUTO)
-    private Integer id;
+    private Long recordId;
 
     /**
      *
      */
     @TableField(value = "created_at")
-    private Date date;
-
-    @TableField(exist = false)
-    private String type="physical";
+    private Date createdAt;
 
     /**
      * 备注
