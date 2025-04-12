@@ -1,11 +1,12 @@
 package com.scau.entity.reminder.vo;
 
+import com.scau.entity.reminder.pojo.Reminder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class ReminderGetVo {
+public class ReminderGetVo extends Reminder {
     @Data
     public static class ReminderListData{
         private Integer total;

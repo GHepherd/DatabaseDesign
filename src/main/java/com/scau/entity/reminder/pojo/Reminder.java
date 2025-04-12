@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
+
 @TableName(value ="health_reminders")
 @Data
 public class Reminder implements Serializable {
@@ -43,7 +45,7 @@ public class Reminder implements Serializable {
      * 触发时间
      */
     @TableField(value = "datetime")
-    private DateTime datetime;
+    private Date datetime;
 
     /**
      * 完成状态

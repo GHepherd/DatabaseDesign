@@ -33,17 +33,17 @@ CREATE TABLE vital_signs (
 
 -- 运动记录表
 CREATE TABLE exercise_records (
-                                  exercise_id INT AUTO_INCREMENT PRIMARY KEY,
-                                  user_id INT NOT NULL,
-                                  exercise_type ENUM('running','cycling','swimming','yoga','other') NOT NULL,
-                                  duration_minutes SMALLINT UNSIGNED COMMENT '运动时长(分钟)',
-                                  distance_km DECIMAL(5,2) COMMENT '距离(千米)',
-                                  calories DECIMAL(6,1) COMMENT '消耗卡路里',
-                                  heartRate INT NOT NULL,
-                                  note VARCHAR(255) COMMENT '备注',
-                                  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                                  FOREIGN KEY (user_id) REFERENCES users(user_id),
-                                  INDEX idx_user_exercise (user_id, exercise_type)
+                             exercise_id INT AUTO_INCREMENT PRIMARY KEY,
+                             user_id INT NOT NULL,
+                             exercise_type ENUM('running','cycling','swimming','yoga','other') NOT NULL,
+                             duration_minutes SMALLINT UNSIGNED COMMENT '运动时长(分钟)',
+                             distance_km DECIMAL(5,2) COMMENT '距离(千米)',
+                             calories DECIMAL(6,1) COMMENT '消耗卡路里',
+                             heartRate INT NOT NULL,
+                             note VARCHAR(255) COMMENT '备注',
+                             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                             FOREIGN KEY (user_id) REFERENCES users(user_id),
+                             INDEX idx_user_exercise (user_id, exercise_type)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 饮食记录表
@@ -85,6 +85,9 @@ CREATE TABLE health_goals (
                               end_date DATE NOT NULL,
                               current_progress DECIMAL(8,2) DEFAULT 0.00,
                               status VARCHAR(50) NOT NULL,
+                              note VARCHAR(50),
+                              title VARCHAR(50) NOT NULL,
+                              current_value DECIMAL(8,2) NOT NULL ,
                               FOREIGN KEY (user_id) REFERENCES users(user_id),
                               INDEX idx_user_goals (user_id, goal_type)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
