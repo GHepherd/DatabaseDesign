@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
 @RestController
-@RequestMapping("/scau/health_reminder")
+@RequestMapping("/scau/health-reminder")
 public class ReminderController {
     @Resource
     ReminderService reminderService;
@@ -21,7 +21,7 @@ public class ReminderController {
      * 获取健康提醒列表
      */
     @GetMapping("/list")
-    public ResponseResult<ReminderGetVo.ReminderListData> reminderGet(@RequestBody ReminderGetDto reminderGetDto){
+    public ResponseResult<ReminderGetVo.ReminderListData> reminderGet(ReminderGetDto reminderGetDto){
         return reminderService.reminderGet(reminderGetDto);
     }
     /**
@@ -34,21 +34,21 @@ public class ReminderController {
     /**
      * 更新健康提醒
      */
-    @PutMapping("/:{id}")
+    @PutMapping("/{id}")
     public ResponseResult reminderUpdate(@PathVariable Long id,@RequestBody ReminderUpdateDto reminderUpdateDto){
         return reminderService.reminderUpdate(id,reminderUpdateDto);
     }
     /**
      * 标记完成健康提醒
      */
-    @PutMapping("/:{id}/complete")
+    @PutMapping("/{id}/complete")
     public ResponseResult reminderCompleteUpdate(@PathVariable Long id){
         return reminderService.reminderCompleteUpdate(id);
     }
     /**
      * 删除健康提醒
      */
-    @DeleteMapping("/:{id}")
+    @DeleteMapping("/{id}")
     public ResponseResult reminderDelete(@PathVariable Long id){
         return reminderService.reminderDelete(id);
     }

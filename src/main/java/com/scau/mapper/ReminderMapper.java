@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -23,7 +24,7 @@ public interface ReminderMapper extends BaseMapper<Reminder>{
                         String reminder_type,
                         String reminder_title,
                         String reminder_repeat,
-                        LocalDateTime datetime,
+                        Date datetime,
                         String status,
                         String description);
     @Update("UPDATE health_reminders " +
@@ -31,7 +32,7 @@ public interface ReminderMapper extends BaseMapper<Reminder>{
             "WHERE reminder_id = #{reminder_id}")
     void upDateReminder(Long reminder_id,
                         String title,
-                        LocalDateTime datetime,
+                        Date datetime,
                         String repeat,
                         String description);
     @Update("UPDATE health_reminders " +

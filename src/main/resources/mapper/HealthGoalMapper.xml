@@ -6,29 +6,37 @@
 
 
     <insert id="addHealGoal" useGeneratedKeys="true" keyProperty="goalId">
-        insert into health_goals (user_id, goal_type, target_value, start_date, end_date, current_progress, status, note, title, current_value)
-        VALUES (#{userId},#{goalType},#{targetValue},#{startDate},#{endDate},#{currentProgress},#{status},#{note},#{title},#{currentValue})
+        insert into health_goals (user_id, goal_type, start_date, end_date, current_progress, note, title)
+        VALUES (#{userId},#{goalType},#{startDate},#{endDate},#{currentProgress},#{note},#{title})
     </insert>
 
 
     <update id="updateGoal">
         update health_goals
         <set>
-            <if test="goalType!=null and goalType!=''">
-                goal_type=#{goalType},
-            </if>
-            target_value=#{targetValue},
-            start_date=#{startDate},
-            end_date=#{endDate},
-            current_progress=#{currentProgress},
-            <if test="status!=null and status!=''">
-                status=#{status},
-            </if>
-            note=#{note},
             <if test="title!=null and status!='title'">
                 title=#{title},
             </if>
-            current_value=#{currentValue}
+
+            <if test="goalType!=null and goalType!=''">
+                goal_type=#{goalType},
+            </if>
+
+            <if test="note!=null and note!=''">
+                note=#{note},
+            </if>
+
+            <if test="startDate !=null">
+                start_date=#{startDate},
+            </if>
+
+            <if test="endDate !=null">
+                end_date=#{endDate},
+            </if>
+
+            <if test=" currentProgress !=null and currentProgress !=''">
+                current_progress = #{currentProgress}
+            </if>
         </set>
         where goal_id=#{goalId} and user_id=#{userId}
     </update>

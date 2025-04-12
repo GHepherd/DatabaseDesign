@@ -13,7 +13,7 @@ import java.util.Map;
  * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
 @RestController
-@RequestMapping("/scau/health_data")
+@RequestMapping("/scau/health-data")
 public class HealthDataController {
 
     @Autowired
@@ -24,8 +24,9 @@ public class HealthDataController {
      * @param healthDataPageDto
      * @return
      */
-    @GetMapping("/list")
+    @PostMapping("/list")
     public ResponseResult<HealthDataPageVo> getHealthDataList(@RequestBody HealthDataPageDto healthDataPageDto){
+
         return healthDataService.getHealthDataList(healthDataPageDto);
     }
 
@@ -47,7 +48,7 @@ public class HealthDataController {
      * @param map
      * @return
      */
-    @PutMapping("/{type}/{id}")
+    @PostMapping("/{type}/{id}")
     public ResponseResult updateHealthData(@PathVariable String type,@PathVariable Long id,@RequestBody Map<String,Object> map){
         return healthDataService.updateHealthData(type,id,map);
     }

@@ -33,6 +33,10 @@ public class HealthGoals implements Serializable {
     @TableField(value = "user_id")
     private Integer userId;
 
+    @TableField(value = "title")
+    private String title;
+
+
     /**
      * 
      */
@@ -40,25 +44,24 @@ public class HealthGoals implements Serializable {
     private String goalType;
 
 
-    @TableField(value = "current_value")
-    private BigDecimal currentValue;
-    /**
-     * 目标数值
-     */
-    @TableField(value = "target_value")
-    private BigDecimal targetValue;
+
+    @TableField(value = "note")
+    private String note;
+
 
     /**
-     * 
+     *
      */
     @TableField(value = "start_date")
     private Date startDate;
 
     /**
-     * 
+     *
      */
     @TableField(value = "end_date")
     private Date endDate;
+
+
 
     /**
      * 
@@ -70,15 +73,12 @@ public class HealthGoals implements Serializable {
      * 
      */
     @TableField(value = "status")
-    private String status;
+    private Integer status;
 
 
-    @TableField(value = "title")
-    private String title;
 
 
-    @TableField(value = "note")
-    private String note;
+
 
 
     @TableField(exist = false)

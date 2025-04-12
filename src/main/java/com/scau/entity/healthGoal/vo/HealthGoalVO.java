@@ -5,21 +5,21 @@ import lombok.Data;
 @Data
 public class HealthGoalVO {
 
-    private String id;
+    private Integer id;
 
-    private String title;
+    private String name;
 
     private String type;
 
-    private Long target;
+    private String description;
 
-    private Integer currentProgress;
+    private Integer progress;
 
     private String startDate;
 
-    private String endDate;
+    private String targetDate;
 
-    private String status;
+    private Integer status;
 
-    private String note;
+
 }

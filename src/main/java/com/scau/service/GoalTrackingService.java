@@ -20,7 +20,7 @@ public interface GoalTrackingService extends IService<HealthGoals> {
 
         PageResult<HealthGoalVO> getHealthGoalList(GoalPageDTO goalPageDTO);
 
-        String addHealthGoal(AddGoalDTO addGoalDTO);
+        void addHealthGoal(AddGoalDTO addGoalDTO);
 
         void updateHealthGoal(Integer id, AddGoalDTO updateGoalDTO);
 

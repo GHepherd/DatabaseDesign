@@ -15,9 +15,6 @@ public class AddGoalDTO {
 
     private String description;
 
-    private BigDecimal currentValue;
-
-    private BigDecimal targetValue;
 
     private Date startDate;
 
@@ -25,6 +22,6 @@ public class AddGoalDTO {
 
     private Integer progress;
 
-    private String status;
+    private Integer status;
 
 }

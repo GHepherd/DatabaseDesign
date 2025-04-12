@@ -9,4 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/scau/analysis")
 public class AnalysisController {
+
 }

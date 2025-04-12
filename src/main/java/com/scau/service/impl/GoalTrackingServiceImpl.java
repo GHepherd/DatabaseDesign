@@ -3,6 +3,7 @@ package com.scau.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.scau.entity.ResponseResult;
 import com.scau.entity.healthGoal.dto.AddGoalDTO;
 import com.scau.entity.healthGoal.dto.GoalPageDTO;
 import com.scau.entity.healthGoal.pojo.HealthGoals;
@@ -59,40 +60,39 @@ public class GoalTrackingServiceImpl extends ServiceImpl<HealthGoalMapper,Health
         List<HealthGoalVO> resultList=new ArrayList<>();
         for(HealthGoals goals:records){
             HealthGoalVO goalVO=new HealthGoalVO();
-            goalVO.setId(String.valueOf(goals.getGoalId()));
-            goalVO.setTitle(goals.getTitle());
+
+            goalVO.setId(goals.getGoalId());
+            goalVO.setName(goals.getTitle());
             goalVO.setType(goals.getGoalType());
-            goalVO.setTarget(goals.getTargetValue().longValue());
-            goalVO.setCurrentProgress(goals.getCurrentProgress().intValue());
+            goalVO.setDescription(goals.getNote());
+            goalVO.setProgress(goals.getCurrentProgress().intValue());
             goalVO.setStartDate(goals.getStartDate().toString());
-            goalVO.setEndDate(goals.getEndDate().toString());
+            goalVO.setTargetDate(goals.getEndDate().toString());
             goalVO.setStatus(goals.getStatus());
-            goalVO.setNote(goals.getNote());
+
             resultList.add(goalVO);
         }
         return new PageResult<>(total,resultList);
     }
 
     @Override
-    public String addHealthGoal(AddGoalDTO addGoalDTO) {
+    public void addHealthGoal(AddGoalDTO addGoalDTO) {
         Long userId= ThreadLocalUtil.getUserId();
         if(userId==null){
             throw new UserNotLoginException();
         }
         HealthGoals healthGoals=new HealthGoals();
-        healthGoals.setTitle(addGoalDTO.getName());
+
         healthGoals.setUserId(Integer.parseInt(String.valueOf(userId)));
+        healthGoals.setTitle(addGoalDTO.getName());
         healthGoals.setGoalType(addGoalDTO.getType());
-        healthGoals.setTargetValue(addGoalDTO.getTargetValue());
-        healthGoals.setCurrentValue(addGoalDTO.getCurrentValue());
+        healthGoals.setNote(addGoalDTO.getDescription());
         healthGoals.setStartDate(addGoalDTO.getStartDate());
         healthGoals.setEndDate(addGoalDTO.getTargetDate());
         healthGoals.setStatus(addGoalDTO.getStatus());
         healthGoals.setCurrentProgress(addGoalDTO.getProgress());
-        healthGoals.setNote(addGoalDTO.getDescription());
+
         healthGoalMapper.addHealGoal(healthGoals);
-        int goalId= healthGoals.getGoalId();
-        return String.valueOf(goalId);
     }
 
     @Override
@@ -102,15 +102,13 @@ public class GoalTrackingServiceImpl extends ServiceImpl<HealthGoalMapper,Health
             throw new UserNotLoginException();
         }
         HealthGoals healthGoals=new HealthGoals();
+
         healthGoals.setGoalId(id);
         healthGoals.setTitle(updateGoalDTO.getName());
         healthGoals.setUserId(Integer.parseInt(String.valueOf(userId)));
         healthGoals.setGoalType(updateGoalDTO.getType());
-        healthGoals.setTargetValue(updateGoalDTO.getTargetValue());
-        healthGoals.setCurrentValue(updateGoalDTO.getCurrentValue());
         healthGoals.setStartDate(updateGoalDTO.getStartDate());
         healthGoals.setEndDate(updateGoalDTO.getTargetDate());
-        healthGoals.setStatus(updateGoalDTO.getStatus());
         healthGoals.setCurrentProgress(updateGoalDTO.getProgress());
         healthGoals.setNote(updateGoalDTO.getDescription());
         healthGoalMapper.updateGoal(healthGoals);

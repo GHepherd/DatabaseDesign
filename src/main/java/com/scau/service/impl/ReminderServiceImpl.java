@@ -37,10 +37,8 @@ public class ReminderServiceImpl implements ReminderService {
         if (userId == null){
             throw new UserNotLoginException();
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(reminderAddDto.getDatetime(),formatter);
         reminderMapper.insertReminder(userId,reminderAddDto.getType(),reminderAddDto.getTitle(),
-                reminderAddDto.getRepeat(),dateTime,reminderAddDto.getStatus(),
+                reminderAddDto.getRepeat(),reminderAddDto.getDateTime(),reminderAddDto.getStatus(),
                 reminderAddDto.getDescription());
         return ResponseResult.successResult();
     }
@@ -51,10 +49,8 @@ public class ReminderServiceImpl implements ReminderService {
         if (userId == null){
             throw new UserNotLoginException();
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(reminderUpdateDto.getDateTime(),formatter);
         reminderMapper.upDateReminder(id,reminderUpdateDto.getTitle(),
-                dateTime,reminderUpdateDto.getRepeat(),
+                reminderUpdateDto.getDateTime(),reminderUpdateDto.getRepeat(),
                 reminderUpdateDto.getDescription());
         return ResponseResult.successResult();
     }
@@ -88,9 +84,15 @@ public class ReminderServiceImpl implements ReminderService {
         ReminderGetVo.ReminderListData reminderListData = new ReminderGetVo.ReminderListData();
         Page<Reminder> page = new Page<>(reminderGetDto.getPage(),reminderGetDto.getLimit());
         QueryWrapper<Reminder> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("reminder_title",reminderGetDto.getKeyword())
-                .like("reminder_type",reminderGetDto.getType())
-                .like("status",reminderGetDto.getStatus());
+        if(reminderGetDto.getKeyword() != null){
+            queryWrapper.like("reminder_title",reminderGetDto.getKeyword());
+        }
+        if(reminderGetDto.getType() != null){
+            queryWrapper.like("reminder_type",reminderGetDto.getType());
+        }
+        if(reminderGetDto.getStatus() != null){
+            queryWrapper.like("status",reminderGetDto.getStatus());
+        }
         Page<Reminder> reminderPage = reminderMapper.selectPage(page,queryWrapper);
         List<ReminderGetVo.ReminderItem> list = reminderPage.getRecords().stream()
                 .map(reminder -> {

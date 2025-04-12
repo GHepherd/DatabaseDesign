@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
 @RestController
-@RequestMapping("/scau/health_goal")
+@RequestMapping("/scau/health-goal")
 public class HealthGoalController {
 
     @Autowired
@@ -36,9 +36,9 @@ public class HealthGoalController {
     * 添加健康目标
     * */
     @PostMapping
-    public ResponseResult<String> addHealthGoal(@RequestBody AddGoalDTO addGoalDTO){
-        String id = goalTrackingService.addHealthGoal(addGoalDTO);
-        return ResponseResult.successResult(id);
+    public ResponseResult addHealthGoal(@RequestBody AddGoalDTO addGoalDTO){
+        goalTrackingService.addHealthGoal(addGoalDTO);
+        return ResponseResult.successResult();
     }
 
     /*
@@ -50,9 +50,9 @@ public class HealthGoalController {
         return ResponseResult.successResult();
     }
 
-    /*
+   /* *//*
     * 更新目标进度
-    * */
+    * *//*
 
     @PutMapping("/{id}/progress")
     public ResponseResult updateProgress(@PathVariable Integer id,Integer progress){
@@ -62,15 +62,15 @@ public class HealthGoalController {
 
 
 
-    /*
+    *//*
     * 完成对应目标
-    * */
+    * *//*
     @PutMapping("/{id}/complete")
     public ResponseResult completeTarget(@PathVariable Integer id){
         goalTrackingService.completeTarget(id);
         return ResponseResult.successResult();
     }
-
+*/
 
     /*
     * 删除对应健康目标

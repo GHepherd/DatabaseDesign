@@ -79,15 +79,13 @@ CREATE TABLE sleep_records (
 CREATE TABLE health_goals (
                               goal_id INT AUTO_INCREMENT PRIMARY KEY,
                               user_id INT NOT NULL,
+                              title VARCHAR(50) NOT NULL,
                               goal_type VARCHAR(50) NOT NULL ,
-                              target_value DECIMAL(8,2) COMMENT '目标数值',
+                              note VARCHAR(50),
                               start_date DATE NOT NULL,
                               end_date DATE NOT NULL,
-                              current_progress DECIMAL(8,2) DEFAULT 0.00,
-                              status VARCHAR(50) NOT NULL,
-                              note VARCHAR(50),
-                              title VARCHAR(50) NOT NULL,
-                              current_value DECIMAL(8,2) NOT NULL ,
+                              current_progress INT NOT NULL,
+                              status INT DEFAULT 0,
                               FOREIGN KEY (user_id) REFERENCES users(user_id),
                               INDEX idx_user_goals (user_id, goal_type)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
