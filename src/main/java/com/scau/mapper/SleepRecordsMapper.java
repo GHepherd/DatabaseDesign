@@ -1,7 +1,6 @@
 package com.scau.mapper;
 
 import com.scau.entity.healthData.pojo.SleepRecords;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -19,9 +18,9 @@ public interface SleepRecordsMapper {
     List<SleepRecords> selectList(@Param("userId")Long userId, @Param("startIndex") int startIndex, @Param("limit") Integer limit, @Param("keyword") String keyword);
 
     @Insert("INSERT INTO sleep_records values (0,#{userId},#{startTime},#{endTime},#{deepSleep},#{note},now())")
-    void insert(Long userId, String startTime, String endTime, Integer deepSleep, String note);
+    void insert(Long userId, String startTime, String endTime, Double deepSleep, String note);
 
-    void updateById(Long id, Long userId, String startTime, String endTime, Integer deepSleep, String note);
+    void updateById(Long id, Long userId, String startTime, String endTime, Double deepSleep, String note);
 
     @Delete("delete from sleep_records where sleep_id=#{id} and user_id=#{userId}")
     void deleteById(Long id, Long userId);

@@ -90,11 +90,17 @@ public class HealthDataServiceImpl implements HealthDataService {
             throw new UserNotLoginException();
         }
         try {
+            for (Map.Entry<String, Object> entry : healthDataMap.entrySet()) {
+                Object value = entry.getValue();
+                if(value.getClass()==Integer.class){
+                    healthDataMap.put(entry.getKey(),Double.valueOf(value.toString()));
+                }
+            }
             if(HealthDataType.PHYSICAL.equals(type)) {
                 String note = (String) healthDataMap.get("note");
-                Double height = (Double) healthDataMap.get("height");
+                Double height = (Double)(healthDataMap.get("height"));
                 Double weight = (Double) healthDataMap.get("weight");
-                Integer bloodPressure = (Integer) healthDataMap.get("bloodPressure");
+                Double bloodPressure = (Double) healthDataMap.get("bloodPressure");
                 Double bloodSugar = (Double) healthDataMap.get("bloodSugar");
                 Double bloodLipids = (Double) healthDataMap.get("bloodLipids");
                 vitalSignsMapper.insert(userId,height,weight,bloodPressure,bloodSugar,bloodLipids,note);
@@ -102,10 +108,10 @@ public class HealthDataServiceImpl implements HealthDataService {
             else if(HealthDataType.EXERCISE.equals(type)) {
                 String note = (String) healthDataMap.get("note");
                 String exerciseType = (String) healthDataMap.get("exerciseType");
-                Integer duration = (Integer) healthDataMap.get("duration");
+                Double duration = (Double) healthDataMap.get("duration");
                 Double distance = (Double) healthDataMap.get("distance");
                 Double calories = (Double) healthDataMap.get("calories");
-                Integer heartRate = (Integer) healthDataMap.get("heartRate");
+                Double heartRate = (Double) healthDataMap.get("heartRate");
                 exerciseRecordsMapper.insert(userId,exerciseType,duration,distance,calories,heartRate,note);
             }
             else if(HealthDataType.DIET.equals(type)) {
@@ -122,7 +128,7 @@ public class HealthDataServiceImpl implements HealthDataService {
                 String note = (String) healthDataMap.get("note");
                 String startTime = (String) healthDataMap.get("startTime");
                 String endTime = (String) healthDataMap.get("endTime");
-                Integer deepSleep = (Integer) healthDataMap.get("deepSleep");
+                Double deepSleep = (Double) healthDataMap.get("deepSleep");
                 sleepRecordsMapper.insert(userId,startTime,endTime,deepSleep,note);
             }
         } catch (Exception e) {
@@ -145,11 +151,17 @@ public class HealthDataServiceImpl implements HealthDataService {
             throw new UserNotLoginException();
         }
         try {
+            for (Map.Entry<String, Object> entry : healthDataMap.entrySet()) {
+                Object value = entry.getValue();
+                if(value.getClass()==Integer.class){
+                    healthDataMap.put(entry.getKey(),Double.valueOf(value.toString()));
+                }
+            }
             if(HealthDataType.PHYSICAL.equals(type)) {
                 String note = (String) healthDataMap.get("note");
                 Double height = (Double) healthDataMap.get("height");
                 Double weight = (Double) healthDataMap.get("weight");
-                Integer bloodPressure = (Integer) healthDataMap.get("bloodPressure");
+                Double bloodPressure = (Double) healthDataMap.get("bloodPressure");
                 Double bloodSugar = (Double) healthDataMap.get("bloodSugar");
                 Double bloodLipids = (Double) healthDataMap.get("bloodLipids");
                 vitalSignsMapper.updateById(id,userId,height,weight,bloodPressure,bloodSugar,bloodLipids,note);
@@ -157,10 +169,10 @@ public class HealthDataServiceImpl implements HealthDataService {
             else if(HealthDataType.EXERCISE.equals(type)) {
                 String note = (String) healthDataMap.get("note");
                 String exerciseType = (String) healthDataMap.get("exerciseType");
-                Integer duration = (Integer) healthDataMap.get("duration");
+                Double duration = (Double) healthDataMap.get("duration");
                 Double distance = (Double) healthDataMap.get("distance");
                 Double calories = (Double) healthDataMap.get("calories");
-                Integer heartRate = (Integer) healthDataMap.get("heartRate");
+                Double heartRate = (Double) healthDataMap.get("heartRate");
                 exerciseRecordsMapper.updateById(id,userId,exerciseType,duration,distance,calories,heartRate,note);
             }
             else if(HealthDataType.DIET.equals(type)) {
@@ -177,7 +189,7 @@ public class HealthDataServiceImpl implements HealthDataService {
                 String note = (String) healthDataMap.get("note");
                 String startTime = (String) healthDataMap.get("startTime");
                 String endTime = (String) healthDataMap.get("endTime");
-                Integer deepSleep = (Integer) healthDataMap.get("deepSleep");
+                Double deepSleep = (Double) healthDataMap.get("deepSleep");
                 sleepRecordsMapper.updateById(id,userId,startTime,endTime,deepSleep,note);
             }
         } catch (Exception e) {
